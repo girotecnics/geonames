@@ -13,13 +13,13 @@ Please include the following require in your composer.json :
 
 	{
 	    "require": {
-	        "girotecnics/geonames": "~1.0"
+	        "girotecnics/geonames": "~1.1"
 	    }
 	}
 
 or install using command line :
 
-	composer require "girotecnics/geonames" "~1.0"
+	composer require "girotecnics/geonames" "~1.1"
 
 after installation, you will need to add the service provider in your config\app.php to 'providers' array
 
