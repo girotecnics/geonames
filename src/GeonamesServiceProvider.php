@@ -56,10 +56,7 @@ class GeonamesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/database/migrations' => base_path('database/migrations')
-        ], 'migrations');
-
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
         $this->publishes([
             __DIR__ . '/config/geonames.php' =>  base_path('config/geonames.php')
