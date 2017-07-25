@@ -1,29 +1,25 @@
-# Laravel / Lumen / Eloquent Geonames
+# Laravel Geonames
 
-[![Latest Stable Version](https://poser.pugx.org/yurtesen/geonames/v/stable)](https://packagist.org/packages/yurtesen/geonames)
-[![Latest Unstable Version](https://poser.pugx.org/yurtesen/geonames/v/unstable)](https://packagist.org/packages/yurtesen/geonames)
-[![Monthly Downloads](https://poser.pugx.org/yurtesen/geonames/d/monthly)](https://packagist.org/packages/yurtesen/geonames)
-[![Total Downloads](https://poser.pugx.org/yurtesen/geonames/d/total.svg)](https://packagist.org/packages/yurtesen/geonames)
-[![Package for Laravel](https://img.shields.io/badge/Package%20for-Laravel/Lumen-blue.svg)](https://packagist.org/packages/yurtesen/geonames)
-[![License](https://poser.pugx.org/yurtesen/geonames/license.svg)](https://packagist.org/packages/yurtesen/geonames)
+[![Latest Stable Version](https://poser.pugx.org/girotecnics/geonames/v/stable)](https://packagist.org/packages/girotecnics/geonames)
+[![Total Downloads](https://poser.pugx.org/girotecnics/geonames/downloads)](https://packagist.org/packages/girotecnics/geonames)
+[![Latest Unstable Version](https://poser.pugx.org/girotecnics/geonames/v/unstable)](https://packagist.org/packages/girotecnics/geonames)
+[![License](https://poser.pugx.org/girotecnics/geonames/license)](https://packagist.org/packages/girotecnics/geonames)
 
 This package provides probably the best Eloquent models, most complete SQL schemas and fastest Artisan commands to import/update a local copy of [GeoNames](http://www.geonames.org/) databases.
 
 ## Installation
 
-*Note:* If you are using Lumen. You have to first install [irazasyed/larasupport](https://github.com/irazasyed/larasupport) !
-
 Please include the following require in your composer.json :
 
 	{
 	    "require": {
-	        "girotecnics/geonames": "dev-master"
+	        "girotecnics/geonames": "~1.0"
 	    }
 	}
 
 or install using command line :
 
-	composer require girotecnics/geonames:dev-master
+	composer require "girotecnics/geonames" "~1.0"
 
 after installation, you will need to add the service provider in your config\app.php to 'providers' array
 
@@ -32,6 +28,8 @@ after installation, you will need to add the service provider in your config\app
 or for Lumen add service provider in bootstrap\app.php Remember that [irazasyed/larasupport](https://github.com/irazasyed/larasupport) must be registered before.
     
 	$app->register(Girotecnics\Geonames\GeonamesServiceProvider::class);
+
+*Note:* If you are using Lumen. You have to first install [irazasyed/larasupport](https://github.com/irazasyed/larasupport) !
 	
 ## Usage and Configuration
 
@@ -70,3 +68,6 @@ GeoNames file names and corresponding table names created in your database.
 
 ## If You Need Help
 Please check the [wiki](https://github.com/yurtesen/geonames/wiki) for more information about how to utilize the package efficiently and usage examples. If something does not work or if you have a suggestion, please do not hesitate to use the issue tracker.
+
+*Note:* If you are using Lumen. You have to first install [irazasyed/larasupport](https://github.com/irazasyed/larasupport) !
+

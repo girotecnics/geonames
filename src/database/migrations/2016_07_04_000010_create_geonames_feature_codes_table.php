@@ -13,6 +13,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this.  If not, see <http://www.gnu.org/licenses/>.
  */
+namespace Geonames\Database\Migrations;
 
 /**
  * User: Evren Yurtesen
@@ -23,6 +24,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Create Geonames Featrures Codes
+ *
+ * @package Geonames
+ */
 class CreateGeonamesFeatureCodesTable extends Migration
 {
     /**
@@ -33,9 +39,9 @@ class CreateGeonamesFeatureCodesTable extends Migration
     public function up()
     {
         Schema::create('geonames_feature_codes', function (Blueprint $table) {
-            $table->string('code',11)->primary();
-            $table->string('name',100);
-            $table->string('description',500);
+            $table->string('code', 11)->primary();
+            $table->string('name', 100);
+            $table->string('description', 500);
         });
     }
 

@@ -21,8 +21,7 @@
  * Time: 1:16 AM
  */
 
-namespace Yurtesen\Geonames\Console;
-
+namespace Girotecnics\Geonames\Console;
 
 use Closure;
 use DB;
@@ -30,6 +29,11 @@ use Illuminate\Console\OutputStyle;
 use RuntimeException;
 use ZipArchive;
 
+/**
+ * Geonames command trait
+ *
+ * @package Geonames
+ */
 trait CommandTrait
 {
 
@@ -122,9 +126,10 @@ trait CommandTrait
      * Parses the array created from different geonames file lines
      * and converts into key=>value type array
      *
-     * @param string $name The config name of the file
+     * @param string  $name    The config name of the file
      * @param boolean $refresh Set true for truncating table before inserting rows
      *
+     * @return void
      */
     protected function parseGeonamesText($name, $refresh = false)
     {
@@ -181,7 +186,9 @@ trait CommandTrait
             },
             'timeZones' => function ($row) {
                 // Skip unusual comment line in this file
-                if ($row[0] === 'CountryCode') return null;
+                if ($row[0] === 'CountryCode') {
+                    return null;
+                }
                 return array(
                     'country_code' => $row[0],
                     'timezone_id' => $row[1],
@@ -241,21 +248,32 @@ trait CommandTrait
 
         // This will greatly improve the performance of inserts
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        $tableName = $this->files[$name]['table'];
-        // If table is empty or we are refreshing, truncate it unless it was recently truncated!
-        if (!in_array($tableName,$this->truncatedTables) &&
+
+        /*
+         * retrieve database prefix to composite $tablename
+         */
+        $tableName = Config::get('database.connections.mysql.prefix')
+                . $this->files[$name]['table'];
+
+        /*
+         * If table is empty or we are refreshing, 
+         * truncate it unless it was recently truncated!
+         */
+        if (!in_array($tableName, $this->truncatedTables) &&
             (DB::table($tableName)->count() === 0 || $refresh)
         ) {
             $this->truncatedTables[] = $tableName;
             $this->line('<info>Database:</info> Truncating table ' . $tableName);
             DB::table($tableName)->truncate();
         }
+
         $buffer = array();
         // If it is a custom country code, use allCountries
-        if (in_array($name, config('geonames.countries')))
+        if (in_array($name, config('geonames.countries'))) {
             $fields = $fieldsArray['allCountries'];
-        else
+        } else {
             $fields = $fieldsArray[$name];
+        }
         $this->parseFile($name, function ($row) use (&$buffer, $fields, $tableName) {
             $insert = $fields($row);
             if (isset($insert) && is_array($insert)) {
@@ -268,8 +286,9 @@ trait CommandTrait
         });
 
         // Insert leftovers in buffer
-        if (count($buffer) > 0)
+        if (count($buffer) > 0) {
             $this->updateOrInsertMultiple($tableName, $buffer);
+        }
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
@@ -277,8 +296,9 @@ trait CommandTrait
     /**
      * Parse a given file and insert into databaase using closure.
      *
-     * @param  string $name
-     * @param  Closure $callback
+     * @param  string  $name     Name
+     * @param  Closure $callback Closure
+     *
      * @return void
      */
     protected function parseFile($name, Closure $callback)
@@ -304,7 +324,10 @@ trait CommandTrait
         /* @var $output OutputStyle */
         $output = $this->getOutput();
         $bar = $output->createProgressBar($steps);
-        $bar->setFormat('<info>Seeding File:</info> ' . basename($path) . ' %current%/%max% %bar% %percent%% <info>Remaining Time:</info> %remaining%');
+        $bar->setFormat('<info>Seeding File:</info> '
+            . basename($path)
+            . ' %current%/%max% %bar% %percent%% '
+            . '<info>Remaining Time:</info> %remaining%');
 
         $steps = 0;
         $fh = fopen($path, 'r');
@@ -314,14 +337,17 @@ trait CommandTrait
         while (!feof($fh)) {
             $line = fgets($fh);
             // ignore empty lines and comments
-            if (!$line or $line === '' or strpos($line, '#') === 0) continue;
+            if (!$line or $line === '' or strpos($line, '#') === 0) {
+                continue;
+            }
             // Geonames format is tab seperated
             $line = explode("\t", $line);
             // Insert using closure
             $callback($line);
             $steps++;
-            if (isset($bar) && $steps % ($this->bufferSize * 10) === 0)
+            if (isset($bar) && $steps % ($this->bufferSize * 10) === 0) {
                 $bar->advance($this->bufferSize * 10);
+            }
         }
         fclose($fh);
         if (isset($bar)) {
@@ -340,7 +366,8 @@ trait CommandTrait
      * Read the file and get line count
      * Not very efficient but does the job well...
      *
-     * @param  string $path
+     * @param  string $path Path
+     *
      * @return int $count
      */
     protected function getLineCount($path)
@@ -353,7 +380,12 @@ trait CommandTrait
         /* @var $output OutputStyle */
         $output = $this->getOutput();
         $bar = $output->createProgressBar($fileSize);
-        $bar->setFormat('<info>Reading File:</info> ' . basename($path) . ' %bar% %percent%% <info>Remaining Time:</info> %remaining%');
+        $bar->setFormat(
+            '<info>Reading File:</info> '
+            . basename($path)
+            . ' %bar% %percent%% <info>Remaining Time:'
+            . '</info> %remaining%'
+        );
 
         $steps = 0;
         $currentSize = 0;
@@ -361,7 +393,9 @@ trait CommandTrait
             $line = fgets($fh);
             $currentSize += strlen($line);
             // ignore empty lines and comments
-            if (!$line or $line === '' or strpos($line, '#') === 0) continue;
+            if (!$line or $line === '' or strpos($line, '#') === 0) {
+                continue;
+            }
             $steps++;
             // Reading is so much faster, must slow down advances
             if (isset($bar) && $steps % ($this->bufferSize * 100) === 0) {
@@ -384,13 +418,13 @@ trait CommandTrait
      *
      * Note: The $data must be an array of arrays and have at least 2 elements.
      *
-     * @param  string $tableName
-     * @param  array (array()) $data
+     * @param string $tableName Table name
+     * @param array  $data      Data
+     *
      * @return boolean
      */
     protected function updateOrInsertMultiple($tableName, $data)
     {
-        $tableName = Config::get('database.connections.mysql.prefix').$tableName;
         $fields = '`' . implode('`,`', array_keys($data[0])) . '`';
         // Create strings for variables
         $questionMarks = '';
@@ -432,6 +466,7 @@ trait CommandTrait
      *
      * @param Boolean $update Update files
      *
+     * @return void
      */
     protected function downloadAllFiles($update = false)
     {
@@ -444,9 +479,8 @@ trait CommandTrait
     /**
      * Download a file if it does not exist
      *
-     * @param String $url Download URL
-     * @param String $path Storage path
-     * @param Boolean $force Force re-download of files
+     * @param String $name   Name
+     * @param Bool   $update Update?
      *
      * @return boolean
      */
@@ -461,16 +495,33 @@ trait CommandTrait
         $fileSize = @filesize($storagePath . '/' . $urlFileName);
         if ($fileSize) {
             if ($fileSize === $urlSize) {
-                $this->line('<info>File Exists:</info> ' . $urlFileName . ' with same size as remote geonames file exists.');
+                $this->line(
+                    '<info>File Exists:</info> '
+                    . $urlFileName
+                    . ' with same size as remote geonames file exists.'
+                );
                 return true;
-            } else if ($fileSize !== $urlSize && !$update) {
-                $this->line('<info>File Exists:</info> ' . $urlFileName . ' with different size as remote geonames file exists. You should consider downloading newest files.');
+            } elseif ($fileSize !== $urlSize && !$update) {
+                $this->line(
+                    '<info>File Exists:</info> '
+                    . $urlFileName
+                    . ' with different size as remote geonames file exists. '
+                    . 'You should consider downloading newest files.'
+                );
+
                 return true;
             } else {
-                // If we are here, we will re-download zip file, so it is worthwhile to remoeve the old txt version first
+                /*
+                *  If we are here, we will re-download zip file, 
+                * so it is worthwhile to remoeve the old txt version first
+                */
                 $extractedFilePath = $storagePath . '/' . $txtFileName;
-                if (substr($urlFileName, -4) === '.zip' && file_exists($extractedFilePath)) {
-                    $this->line('<info>Removing Old File:</info> ' . basename($extractedFilePath));
+                if (substr($urlFileName, -4) === '.zip'
+                    && file_exists($extractedFilePath)) {
+                    $this->line(
+                        '<info>Removing Old File:</info> '
+                        . basename($extractedFilePath)
+                    );
                     unlink($extractedFilePath);
                 }
             }
@@ -484,7 +535,7 @@ trait CommandTrait
         // Create .gitignore if it does not exist in $storagePath
         if (!file_exists($storagePath.'/.gitignore')) {
             $gitignore = "*\n!.gitignore\n";
-            file_put_contents($storagePath.'/.gitignore',$gitignore);
+            file_put_contents($storagePath.'/.gitignore', $gitignore);
         }
 
         // Open file and truncate it for writing (requires fopen_wrappers)
@@ -505,7 +556,11 @@ trait CommandTrait
         /* @var $output OutputStyle */
         $output = $this->getOutput();
         $bar = $output->createProgressBar($steps);
-        $bar->setFormat('<info>Downloading:</info> ' . $urlFileName . ' %bar% %percent%% <info>Remaining Time:</info> %remaining%');
+        $bar->setFormat(
+            '<info>Downloading:</info> '
+            . $urlFileName
+            . ' %bar% %percent%% <info>Remaining Time:</info> %remaining%'
+        );
         while (!feof($sourceFP)) {
             fwrite($targetFP, stream_get_contents($sourceFP, $bufferSize));
             $bar->advance();
@@ -514,7 +569,12 @@ trait CommandTrait
         $output->newLine();
 
         clearstatcache(true, $targetFile);
-        $this->line('<info>File Downloaded:</info> ' . $urlFileName . ' - ' . filesize($targetFile) . ' bytes.');
+        $this->line(
+            '<info>File Downloaded:</info> '
+            . $urlFileName
+            . ' - ' . filesize($targetFile)
+            . ' bytes.'
+        );
 
         return true;
     }
@@ -522,13 +582,16 @@ trait CommandTrait
     /**
      * Unzip the file
      *
-     * @param  string $name
+     * @param  string $name Name
+     *
+     * @return void
      */
     protected function unZip($name)
     {
         $zipFileName = basename($this->files[$name]['url']);
-        if (!substr($zipFileName, -4) === '.zip')
+        if (!substr($zipFileName, -4) === '.zip') {
             throw new RuntimeException($zipFileName . ' does not have .zip extension');
+        }
 
         // Final file path
         $storagePath = config('geonames.storagePath');
@@ -543,16 +606,31 @@ trait CommandTrait
             $uncompressedSize = $zipArchive->statName($extractedFile)['size'];
             $fileSize = filesize($path);
             if ($uncompressedSize !== $fileSize) {
-                $this->line('<info>Existing File:</info> ' . basename($path) . ' size does not match the one in ' . $zipFileName);
+                $this->line(
+                    '<info>Existing File:</info> '
+                    . basename($path)
+                    . ' size does not match the one in '
+                    . $zipFileName
+                );
             } else {
                 // Do not extract again
-                $this->line('<info>Existing File:</info> ' . 'Found ' . basename($path) . ' file extracted from ' . $zipFileName);
+                $this->line(
+                    '<info>Existing File:</info> '
+                    . 'Found '
+                    . basename($path)
+                    . ' file extracted from '
+                    . $zipFileName
+                );
                 $zipArchive->close();
                 return;
             }
         }
         // File does not exist or size does not match
-        $this->line('<info>Extracting File:</info> ' . $extractedFile . ' from ' . $zipFileName . ' ...!!!Please Wait!!!...');
+        $this->line(
+            '<info>Extracting File:</info> '
+            . $extractedFile . ' from ' . $zipFileName
+            . ' ...!!!Please Wait!!!...'
+        );
         // Extract file
         $zipArchive->extractTo($storagePath . '/', $extractedFile);
         $zipArchive->close();
@@ -562,13 +640,15 @@ trait CommandTrait
      * Get Remote File Size
      *
      * @param string $url remote address
+     *
      * @return int|boolean URL size in bytes or false
      */
     protected function getUrlSize($url)
     {
         $data = get_headers($url, true);
-        if (isset($data['Content-Length']))
+        if (isset($data['Content-Length'])) {
             return (int)$data['Content-Length'];
+        }
         return false;
     }
 
@@ -596,16 +676,21 @@ trait CommandTrait
     }
 
 
+    /**
+     * Update list of files
+     *
+     * @return void
+     */
     protected function updateFilesList()
     {
         // Get ISO codes for countries to import if there are any
         $countries = config('geonames.countries');
         if (!empty($countries)) {
-
             unset($this->files['allCountries']);
             foreach ($countries as $country) {
                 $this->files[$country] = [
-                    'url' => 'http://download.geonames.org/export/dump/' . $country . '.zip',
+                    'url' => 'http://download.geonames.org/export/dump/'
+                        . $country . '.zip',
                     'filename' => $country,
                     'table' => 'geonames_geonames'
                 ];

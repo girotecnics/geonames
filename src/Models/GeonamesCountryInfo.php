@@ -20,12 +20,12 @@
  * Time: 11:30 AM
  */
 
-namespace Yurtesen\Geonames\Models;
+namespace Girotecnics\Geonames\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Yurtesen\Geonames\Models\GeonamesCountryInfo
+ * Girotecnics\Geonames\Models\GeonamesCountryInfo
  *
  * @property string $iso
  * @property string $iso3
@@ -47,29 +47,30 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $geoname_id
  * @property string $neighbors
  * @property string $equivalent_fips_code
- * @property-read \Yurtesen\Geonames\Models\GeonamesTimezone $timezone
- * @property-read \Yurtesen\Geonames\Models\GeonamesGeoname $continent
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo whereIso($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo whereIso3($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo whereIsoNumeric($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo whereFips($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo whereCountry($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo whereCapital($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo whereArea($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo wherePopulation($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo whereContinentCode($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo whereContinentId($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo whereTld($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo whereCurrencyCode($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo whereCurrencyName($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo wherePhone($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo wherePostalCodeFormat($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo wherePostalCodeRegex($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo whereLanguages($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo whereGeonameId($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo whereNeighbors($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesCountryInfo whereEquivalentFipsCode($value)
+ * @property-read \Girotecnics\Geonames\Models\GeonamesTimezone $timezone
+ * @property-read \Girotecnics\Geonames\Models\GeonamesGeoname $continent
+ * @method static whereIso($value)
+ * @method static whereIso3($value)
+ * @method static whereIsoNumeric($value)
+ * @method static whereFips($value)
+ * @method static whereCountry($value)
+ * @method static whereCapital($value)
+ * @method static whereArea($value)
+ * @method static wherePopulation($value)
+ * @method static whereContinentCode($value)
+ * @method static whereContinentId($value)
+ * @method static whereTld($value)
+ * @method static whereCurrencyCode($value)
+ * @method static whereCurrencyName($value)
+ * @method static wherePhone($value)
+ * @method static wherePostalCodeFormat($value)
+ * @method static wherePostalCodeRegex($value)
+ * @method static whereLanguages($value)
+ * @method static whereGeonameId($value)
+ * @method static whereNeighbors($value)
+ * @method static whereEquivalentFipsCode($value)
  * @mixin \Eloquent
+ * @package Geonames
  */
 class GeonamesCountryInfo extends Model
 {
@@ -127,8 +128,6 @@ class GeonamesCountryInfo extends Model
      */
     public function continent()
     {
-        return $this->hasOne(GeonamesGeoname::class,'geoname_id','continent_id');
+        return $this->hasOne(GeonamesGeoname::class, 'geoname_id', 'continent_id');
     }
-
-
 }

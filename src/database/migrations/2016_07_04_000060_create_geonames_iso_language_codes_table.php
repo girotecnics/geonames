@@ -13,6 +13,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this.  If not, see <http://www.gnu.org/licenses/>.
  */
+namespace Geonames\Database\Migrations;
 
 /**
  * User: Evren Yurtesen
@@ -23,6 +24,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Create Geonames Tables
+ *
+ * @package Geonames
+ */
 class CreateGeonamesIsoLanguageCodesTable extends Migration
 {
     /**
@@ -33,9 +39,9 @@ class CreateGeonamesIsoLanguageCodesTable extends Migration
     public function up()
     {
         Schema::create('geonames_iso_language_codes', function (Blueprint $table) {
-            $table->char('iso_639_3',3)->primary();
-            $table->char('iso_639_2',3)->unique()->nullable();
-            $table->char('iso_639_1',2)->unique()->nullable();
+            $table->char('iso_639_3', 3)->primary();
+            $table->char('iso_639_2', 3)->unique()->nullable();
+            $table->char('iso_639_1', 2)->unique()->nullable();
             $table->string('language_name', 200);
         });
     }

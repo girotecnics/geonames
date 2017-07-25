@@ -20,12 +20,12 @@
  * Time: 11:30 AM
  */
 
-namespace Yurtesen\Geonames\Models;
+namespace Girotecnics\Geonames\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Yurtesen\Geonames\Models\GeonamesAlternateName
+ * Girotecnics\Geonames\Models\GeonamesAlternateName
  *
  * @property integer $alternate_name_id
  * @property integer $geoname_id
@@ -35,18 +35,20 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean $isShortName
  * @property boolean $isColloquial
  * @property boolean $isHistoric
- * @property-read \Yurtesen\Geonames\Models\GeonamesGeoname $geoname
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesAlternateName whereAlternateNameId($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesAlternateName whereGeonameId($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesAlternateName whereIsoLanguage($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesAlternateName whereAlternateName($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesAlternateName whereIsPreferredName($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesAlternateName whereIsShortName($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesAlternateName whereIsColloquial($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesAlternateName whereIsHistoric($value)
+ * @property-read \Girotecnics\Geonames\Models\GeonamesGeoname $geoname
+ * @method static whereAlternateNameId($value)
+ * @method static whereGeonameId($value)
+ * @method static whereIsoLanguage($value)
+ * @method static whereAlternateName($value)
+ * @method static whereIsPreferredName($value)
+ * @method static whereIsShortName($value)
+ * @method static whereIsColloquial($value)
+ * @method static whereIsHistoric($value)
  * @mixin \Eloquent
+ * @package Geonames
  */
-class GeonamesAlternateName extends Model {
+class GeonamesAlternateName extends Model
+{
     /**
      * The attributes that are mass assignable.
      *
@@ -89,8 +91,8 @@ class GeonamesAlternateName extends Model {
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function geoname() {
-        return $this->belongsTo(GeonamesGeoname::class,'geoname_id','geoname_id');
+    public function geoname()
+    {
+        return $this->belongsTo(GeonamesGeoname::class, 'geoname_id', 'geoname_id');
     }
-
 }

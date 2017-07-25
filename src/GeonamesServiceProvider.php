@@ -20,10 +20,15 @@
  * Time: 2:16 PM
  */
 
-namespace Yurtesen\Geonames;
+namespace Girotecnics\Geonames;
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Service Provider for Geonames package
+ *
+ * @package Geonames
+ */
 class GeonamesServiceProvider extends ServiceProvider
 {
     /**
@@ -32,9 +37,9 @@ class GeonamesServiceProvider extends ServiceProvider
      * @var array
      */
     protected $serviceCommands = [
-        'Yurtesen\Geonames\Console\Download',
-        'Yurtesen\Geonames\Console\Install',
-        'Yurtesen\Geonames\Console\Seed',
+        'Girotecnics\Geonames\Console\Download',
+        'Girotecnics\Geonames\Console\Install',
+        'Girotecnics\Geonames\Console\Seed',
     ];
 
     /**
@@ -51,7 +56,6 @@ class GeonamesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         $this->publishes([
             __DIR__ . '/database/migrations' => base_path('database/migrations')
         ], 'migrations');
@@ -83,5 +87,4 @@ class GeonamesServiceProvider extends ServiceProvider
     {
         return $this->serviceCommands;
     }
-
 }

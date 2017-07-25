@@ -13,6 +13,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this.  If not, see <http://www.gnu.org/licenses/>.
  */
+namespace Geonames\Database\Migrations;
 
 /**
  * User: Evren Yurtesen
@@ -23,6 +24,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Create Geonames Tables
+ *
+ * @package Geonames
+ */
 class CreateGeonamesHierarchiesTable extends Migration
 {
     /**
@@ -34,10 +40,20 @@ class CreateGeonamesHierarchiesTable extends Migration
     {
         Schema::create('geonames_hierarchies', function (Blueprint $table) {
             $table->integer('parent_id')->index()->unsigned();
-            $table->foreign('parent_id')->references('geoname_id')->on('geonames_geonames')->onUpdate('cascade')->onDelete('cascade');
+            $table
+                ->foreign('parent_id')
+                ->references('geoname_id')
+                ->on('geonames_geonames')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->integer('child_id')->index()->unsigned();
-            $table->foreign('child_id')->references('geoname_id')->on('geonames_geonames')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('type',40)->index();
+            $table
+                ->foreign('child_id')
+                ->references('geoname_id')
+                ->on('geonames_geonames')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('type', 40)->index();
             $table->unique(['parent_id','child_id']);
         });
     }

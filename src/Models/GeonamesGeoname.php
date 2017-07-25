@@ -20,13 +20,15 @@
  * Time: 11:30 AM
  */
 
-namespace Yurtesen\Geonames\Models;
+namespace Girotecnics\Geonames\Models;
 
 use DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent;
+use Illuminate\Database\Query;
 
 /**
- * Yurtesen\Geonames\Models\GeonamesGeoname
+ * Girotecnics\Geonames\Models\GeonamesGeoname
  *
  * @property integer $geoname_id
  * @property string $name
@@ -47,34 +49,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $dem
  * @property string $timezone_id
  * @property string $modified_at
- * @property-read \Yurtesen\Geonames\Models\GeonamesAlternateName $alternateName
- * @property-read \Yurtesen\Geonames\Models\GeonamesTimezone $timeZone
- * @property-read \Yurtesen\Geonames\Models\GeonamesCountryInfo $countryInfo
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereGeonameId($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereAsciiName($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereAlternateNames($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereLatitude($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereLongitude($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereFeatureClass($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereFeatureCode($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereCountryCode($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereCc2($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereAdmin1Code($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereAdmin2Code($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereAdmin3Code($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereAdmin4Code($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname wherePopulation($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereElevation($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereDem($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereTimezoneId($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereModifiedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname admin1()
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname addCountryInfo()
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname city($name = null, $featureCodes = array())
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname country($name = null, $featureCodes = array())
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname searchByFeature($name = null, $feature_class = null, $featureCodes = null)
+ * @property-read \Girotecnics\Geonames\Models\GeonamesAlternateName $alternateName
+ * @property-read \Girotecnics\Geonames\Models\GeonamesTimezone $timeZone
+ * @property-read \Girotecnics\Geonames\Models\GeonamesCountryInfo $countryInfo
  * @mixin \Eloquent
+ * @package Geonames
  */
 class GeonamesGeoname extends Model
 {
@@ -160,18 +139,23 @@ class GeonamesGeoname extends Model
     /**
      * Return admin1 information in result
      *
-     * @param \Illuminate\Database\Query\Builder $query
-     * @return \Illuminate\Database\Query\Builder
+     * @param Query\Builder $query Query Builder
+     *
+     * @return Query\Builder
      */
     public function scopeAdmin1($query)
     {
         $table = 'geonames_geonames';
 
-        if (!isset($query->getQuery()->columns))
+        if (!isset($query->getQuery()->columns)) {
             $query = $query->addSelect($this->usefulScopeColumns);
+        }
 
         $query = $query
-            ->leftJoin('geonames_admin1_codes as admin1', 'admin1.code', '=',
+            ->leftJoin(
+                'geonames_admin1_codes as admin1',
+                'admin1.code',
+                '=',
                 DB::raw('CONCAT_WS(\'.\',' .
                     $table . '.country_code,' .
                     $table . '.admin1_code)')
@@ -187,18 +171,23 @@ class GeonamesGeoname extends Model
     /**
      * Return country information in result
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Query\Builder
+     * @param Query\Builder|Eloquent\Builder $query Query
+     *
+     * @return Query\Builder
      */
     public function scopeAddCountryInfo($query)
     {
         $table = 'geonames_geonames';
 
-        if (!isset($query->getQuery()->columns))
+        if (!isset($query->getQuery()->columns)) {
             $query = $query->addSelect($this->usefulScopeColumns);
+        }
 
         $query = $query
-            ->leftJoin('geonames_country_infos as country_info', $table . '.country_code', '=',
+            ->leftJoin(
+                'geonames_country_infos as country_info',
+                $table . '.country_code',
+                '=',
                 'country_info.iso'
             )
             ->addSelect(
@@ -214,22 +203,31 @@ class GeonamesGeoname extends Model
      * Build a query to find major cities. Accepts wildcards eg. 'Helsin%'
      *
      * Suggested index for search:
-     * ALTER TABLE geonames_geonames ADD INDEX geonames_geonames_feature_name_index
-     *                                                          (`feature_class`,`feature_code`,`name`);
+     * ALTER TABLE geonames_geonames
+     *   ADD INDEX geonames_geonames_feature_name_index
+     *   (`feature_class`,`feature_code`,`name`);
+     *
      * and if you will limit queries by country you should also use:
-     * ALTER TABLE geonames_geonames ADD INDEX geonames_geonames_country_feature_name_index
-     *                                                          (`country_code`,`feature_class`,`feature_code`,`name`);
+     *
+     * ALTER TABLE geonames_geonames
+     *   ADD INDEX geonames_geonames_country_feature_name_index
+     *   (`country_code`,`feature_class`,`feature_code`,`name`);
      *
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query
-     * @param String $name
-     * @param array $featureCodes List of feature codes to use when returning results
-     *                            defaults to ['PPLC','PPLA','PPLA2', 'PPLA3']
-     * @return \Illuminate\Database\Query\Builder
+     * @param Query\Builder $query        Query
+     * @param String        $name         Name
+     * @param array         $featureCodes List of feature codes to use when
+     *                                    returning results defaults to
+     *                                    ['PPLC','PPLA','PPLA2', 'PPLA3']
+     *
+     * @return Query\Builder
      */
-    public function scopeCity($query, $name = null, $featureCodes = ['PPLC', 'PPLA', 'PPLA2', 'PPLA3'])
-    {
-        return $this->scopeSearchByFeature($query,$name,'P',$featureCodes);
+    public function scopeCity(
+        $query,
+        $name = null,
+        $featureCodes = ['PPLC', 'PPLA', 'PPLA2', 'PPLA3']
+    ) {
+        return $this->scopeSearchByFeature($query, $name, 'P', $featureCodes);
     }
 
     /**
@@ -239,36 +237,44 @@ class GeonamesGeoname extends Model
      * ALTER TABLE geonames_geonames ADD INDEX geonames_geonames_feature_name_index
      *                                                          (`feature_class`,`feature_code`,`name`);
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query
-     * @param String $name
-     * @param array $featureCodes List of feature codes to use when returning results
-     *                            defaults to ['PCLI']
-     * @return \Illuminate\Database\Query\Builder
+     * @param Query\Builder $query        Query
+     * @param String        $name         Name
+     * @param array         $featureCodes List of feature codes to use when returning
+     *                                    results defaults to ['PCLI']
+     *
+     * @return Query\Builder
      */
     public function scopeCountry($query, $name = null, $featureCodes = ['PCLI'])
     {
-        return $this->scopeSearchByFeature($query,$name,'A',$featureCodes);
+        return $this->scopeSearchByFeature($query, $name, 'A', $featureCodes);
     }
 
 
     /**
      * Generic query used by scopes, but you can call it with custom feataure codes.
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query
-     * @param String $name
-     * @param String $feature_class The 1 character feature class
-     * @param array $featureCodes List of feature codes to use when returning results
-     * @return \Illuminate\Database\Query\Builder
+     * @param Query\Builder $query         Query
+     * @param String        $name          Name
+     * @param String        $feature_class The 1 character feature class
+     * @param array         $featureCodes  Feature codes to use when returning results
+     *
+     * @return Query\Builder
      */
-    public function scopeSearchByFeature($query, $name = null, $feature_class=null, $featureCodes = null)
-    {
+    public function scopeSearchByFeature(
+        $query,
+        $name = null,
+        $feature_class = null,
+        $featureCodes = null
+    ) {
         $table = 'geonames_geonames';
 
-        if (!isset($query->getQuery()->columns))
+        if (!isset($query->getQuery()->columns)) {
             $query = $query->addSelect($this->usefulScopeColumns);
+        }
 
-        if ($name !== null)
+        if ($name !== null) {
             $query = $query->where($table . '.name', 'LIKE', $name);
+        }
 
         $query = $query
             ->where($table . '.feature_class', $feature_class)
@@ -276,6 +282,4 @@ class GeonamesGeoname extends Model
 
         return $query;
     }
-
-
 }

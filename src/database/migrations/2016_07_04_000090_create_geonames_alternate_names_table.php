@@ -13,6 +13,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this.  If not, see <http://www.gnu.org/licenses/>.
  */
+namespace Geonames\Database\Migrations;
 
 /**
  * User: Evren Yurtesen
@@ -23,6 +24,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Create Geonames Tables
+ *
+ * @package Geonames
+ */
 class CreateGeonamesAlternateNamesTable extends Migration
 {
     /**
@@ -35,7 +41,12 @@ class CreateGeonamesAlternateNamesTable extends Migration
         Schema::create('geonames_alternate_names', function (Blueprint $table) {
             $table->integer('alternate_name_id')->primary()->unsigned();
             $table->integer('geoname_id')->index()->unsigned();
-            $table->foreign('geoname_id')->references('geoname_id')->on('geonames_geonames')->onUpdate('cascade')->onDelete('cascade');
+            $table
+                ->foreign('geoname_id')
+                ->references('geoname_id')
+                ->on('geonames_geonames')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('iso_language', 7)->nullable();
             $table->string('alternate_name', 400)->nullable();
             $table->boolean('isPreferredName');

@@ -1,6 +1,6 @@
 {
   "name": "girotecnics/geonames",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Geonames importer and models for Eloquent ORM based on yurtesen/geonames",
   "license": "GPL-3.0",
   "authors": [
@@ -31,7 +31,7 @@
       "src/Models"
     ],
     "psr-4": {
-      "Yurtesen\\Geonames\\": "src/"
+      "Girotecnics\\Geonames\\": "src/"
     }
   }
 }

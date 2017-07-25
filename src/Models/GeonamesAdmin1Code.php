@@ -20,24 +20,25 @@
  * Time: 11:30 AM
  */
 
-namespace Yurtesen\Geonames\Models;
+namespace Girotecnics\Geonames\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Yurtesen\Geonames\Models\GeonamesAdmin1Code
+ * Girotecnics\Geonames\Models\GeonamesAdmin1Code
  *
  * @property string $code
  * @property string $name
  * @property string $name_ascii
  * @property integer $geoname_id
- * @property-read \Yurtesen\Geonames\Models\GeonamesGeoname $geoname
- * @property-read \Illuminate\Database\Eloquent\Collection|\Yurtesen\Geonames\Models\GeonamesHierarchy[] $hierarchies
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesAdmin1Code whereCode($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesAdmin1Code whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesAdmin1Code whereNameAscii($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesAdmin1Code whereGeonameId($value)
+ * @property-read \Girotecnics\Geonames\Models\GeonamesGeoname $geoname
+ * @property-read \Girotecnics\Geonames\Models\GeonamesHierarchy[] $hierarchies
+ * @method static \Girotecnics\Geonames\Models\GeonamesAdmin1Code whereCode($value)
+ * @method static \Girotecnics\Geonames\Models\GeonamesAdmin1Code whereName($value)
+ * @method static \Girotecnics\Geonames\Models\GeonamesAdmin1Code whereNameAscii($value)
+ * @method static \Girotecnics\Geonames\Models\GeonamesAdmin1Code whereGeonameId($value)
  * @mixin \Eloquent
+ * @package Geotecnics
  */
 class GeonamesAdmin1Code extends Model
 {
@@ -97,6 +98,4 @@ class GeonamesAdmin1Code extends Model
     {
         return $this->hasMany(GeonamesHierarchy::class, 'parent_id', 'geoname_id');
     }
-
-
 }

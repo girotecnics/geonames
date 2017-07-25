@@ -13,6 +13,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this.  If not, see <http://www.gnu.org/licenses/>.
  */
+namespace Geonames\Database\Migrations;
 
 /**
  * User: Evren Yurtesen
@@ -23,6 +24,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Create Geonames Tables
+ *
+ * @package Geonames
+ */
 class CreateGeonamesAdmin1CodesTable extends Migration
 {
     /**
@@ -33,11 +39,16 @@ class CreateGeonamesAdmin1CodesTable extends Migration
     public function up()
     {
         Schema::create('geonames_admin1_codes', function (Blueprint $table) {
-            $table->string('code',20)->unique();
-            $table->string('name',100)->unique();
-            $table->string('name_ascii',100)->unique();
+            $table->string('code', 20)->unique();
+            $table->string('name', 100)->unique();
+            $table->string('name_ascii', 100)->unique();
             $table->integer('geoname_id')->primary()->unsigned();
-            $table->foreign('geoname_id')->references('geoname_id')->on('geonames_geonames')->onUpdate('cascade')->onDelete('cascade');
+            $table
+                ->foreign('geoname_id')
+                ->references('geoname_id')
+                ->on('geonames_geonames')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
