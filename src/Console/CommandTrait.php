@@ -252,7 +252,7 @@ trait CommandTrait
         /*
          * retrieve database prefix to composite $tablename
          */
-        $tableName = Config::get('database.connections.mysql.prefix')
+        $tableName = config('database.connections.mysql.prefix')
                 . $this->files[$name]['table'];
 
         /*

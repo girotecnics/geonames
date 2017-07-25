@@ -29,7 +29,6 @@ and execute installation, download and seed
 
     php artisan geonames:install
 	php artisan migrate
-	php artisan geonames:download
 	php artisan geonames:seed
 
 
