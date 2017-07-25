@@ -13,6 +13,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this.  If not, see <http://www.gnu.org/licenses/>.
  */
+namespace Girotecnics\Geonames;
 
 /**
  * User: Evren Yurtesen
@@ -28,7 +29,7 @@ use Illuminate\Database\Migrations\Migration;
  *
  * @package Geonames
  */
-class CreateGeonamesIsoLanguageCodesTable extends Migration
+class CreateGeonamesAdmin2CodesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -37,11 +38,17 @@ class CreateGeonamesIsoLanguageCodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('geonames_iso_language_codes', function (Blueprint $table) {
-            $table->char('iso_639_3', 3)->primary();
-            $table->char('iso_639_2', 3)->unique()->nullable();
-            $table->char('iso_639_1', 2)->unique()->nullable();
-            $table->string('language_name', 200);
+        \Schema::create('geonames_admin2_codes', function (Blueprint $table) {
+            $table->string('code', 20)->unique();
+            $table->string('name', 100)->unique();
+            $table->string('name_ascii', 100)->unique();
+            $table->integer('geoname_id')->primary()->unsigned();
+            $table
+                ->foreign('geoname_id')
+                ->references('geoname_id')
+                ->on('geonames_geonames')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
@@ -52,6 +59,6 @@ class CreateGeonamesIsoLanguageCodesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('geonames_iso_language_codes');
+        \Schema::drop('geonames_admin2_codes');
     }
 }

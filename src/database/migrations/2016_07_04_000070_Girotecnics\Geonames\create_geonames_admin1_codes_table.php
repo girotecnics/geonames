@@ -13,6 +13,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this.  If not, see <http://www.gnu.org/licenses/>.
  */
+namespace Girotecnics\Geonames;
 
 /**
  * User: Evren Yurtesen
@@ -28,7 +29,7 @@ use Illuminate\Database\Migrations\Migration;
  *
  * @package Geonames
  */
-class CreateGeonamesGeonamesTable extends Migration
+class CreateGeonamesAdmin1CodesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -37,32 +38,17 @@ class CreateGeonamesGeonamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('geonames_geonames', function (Blueprint $table) {
+        \Schema::create('geonames_admin1_codes', function (Blueprint $table) {
+            $table->string('code', 20)->unique();
+            $table->string('name', 100)->unique();
+            $table->string('name_ascii', 100)->unique();
             $table->integer('geoname_id')->primary()->unsigned();
-            $table->string('name', 200);
-            $table->string('ascii_name', 200)->nullable();
-            $table->string('alternate_names', 10000)->nullable();
-            $table->decimal('latitude', 7, 5);
-            $table->decimal('longitude', 8, 5);
-            $table->char('feature_class', 1)->nullable();
-            $table->string('feature_code', 10)->nullable();
-            $table->char('country_code', 2);
-            $table->string('cc2', 60)->nullable();
-            $table->string('admin1_code', 20)->nullable();
-            $table->string('admin2_code', 80)->nullable();
-            $table->string('admin3_code', 20)->nullable();
-            $table->string('admin4_code', 20)->nullable();
-            $table->integer('population')->unsigned()->nullable();
-            $table->integer('elevation')->nullable();
-            $table->integer('dem')->nullable();
-            $table->string('timezone_id', 40)->index()->nullable();
             $table
-                ->foreign('timezone_id')
-                ->references('timezone_id')
-                ->on('geonames_timezones')
+                ->foreign('geoname_id')
+                ->references('geoname_id')
+                ->on('geonames_geonames')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->date('modified_at');
         });
     }
 
@@ -73,6 +59,6 @@ class CreateGeonamesGeonamesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('geonames_geonames');
+        \Schema::drop('geonames_admin1_codes');
     }
 }

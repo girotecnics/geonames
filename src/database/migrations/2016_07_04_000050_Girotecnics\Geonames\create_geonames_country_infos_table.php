@@ -13,6 +13,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this.  If not, see <http://www.gnu.org/licenses/>.
  */
+namespace Girotecnics\Geonames;
 
 /**
  * User: Evren Yurtesen
@@ -37,7 +38,7 @@ class CreateGeonamesCountryInfosTable extends Migration
      */
     public function up()
     {
-        Schema::create('geonames_country_infos', function (Blueprint $table) {
+        \Schema::create('geonames_country_infos', function (Blueprint $table) {
             $table->char('iso', 2)->unique();
             $table->char('iso3', 3)->unique();
             $table->char('iso_numeric', 3)->unique();
@@ -74,7 +75,7 @@ class CreateGeonamesCountryInfosTable extends Migration
         });
 
         // Now can add the foreign key constraint to timezones table also
-        Schema::table('geonames_timezones', function (Blueprint $table) {
+        \Schema::table('geonames_timezones', function (Blueprint $table) {
             $table
                 ->foreign('country_code')
                 ->references('iso')
@@ -92,9 +93,9 @@ class CreateGeonamesCountryInfosTable extends Migration
     public function down()
     {
         // First drop the foreign constraint from timezones table
-        Schema::table('geonames_timezones', function (Blueprint $table) {
+        \Schema::table('geonames_timezones', function (Blueprint $table) {
             $table->dropForeign('geonames_timezones_country_code_foreign');
         });
-        Schema::drop('geonames_country_infos');
+        \Schema::drop('geonames_country_infos');
     }
 }

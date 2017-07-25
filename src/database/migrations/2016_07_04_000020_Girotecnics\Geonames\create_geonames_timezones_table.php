@@ -13,6 +13,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this.  If not, see <http://www.gnu.org/licenses/>.
  */
+namespace Girotecnics\Geonames;
 
 /**
  * User: Evren Yurtesen
@@ -37,7 +38,7 @@ class CreateGeonamesTimezonesTable extends Migration
      */
     public function up()
     {
-        Schema::create('geonames_timezones', function (Blueprint $table) {
+        \Schema::create('geonames_timezones', function (Blueprint $table) {
             $table->string('timezone_id', 40)->primary();
             $table->char('country_code', 2)->index();
             // We are adding this constraint from geonames_country_infos migration
@@ -55,6 +56,6 @@ class CreateGeonamesTimezonesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('geonames_timezones');
+        \Schema::drop('geonames_timezones');
     }
 }
