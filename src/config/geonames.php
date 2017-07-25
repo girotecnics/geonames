@@ -29,7 +29,7 @@ return array(
     |--------------------------------------------------------------------------
     |
     | Keep extracted txt files from zip files (normal txt files stay in either case
-    | On the expense of storage space, you wont need re-unzip gbyte sized files if you 
+    | On the expense of storage space, you wont need re-unzip gbyte sized files if you
     | are importing same data again and again...|
     |
     */

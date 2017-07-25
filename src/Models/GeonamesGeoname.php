@@ -167,11 +167,15 @@ class GeonamesGeoname extends Model
     {
         $table = 'geonames_geonames';
 
-        if (!isset($query->getQuery()->columns))
+        if (!isset($query->getQuery()->columns)) {
             $query = $query->addSelect($this->usefulScopeColumns);
+        }
 
         $query = $query
-            ->leftJoin('geonames_admin1_codes as admin1', 'admin1.code', '=',
+            ->leftJoin(
+                'geonames_admin1_codes as admin1',
+                'admin1.code',
+                '=',
                 DB::raw('CONCAT_WS(\'.\',' .
                     $table . '.country_code,' .
                     $table . '.admin1_code)')
@@ -194,11 +198,15 @@ class GeonamesGeoname extends Model
     {
         $table = 'geonames_geonames';
 
-        if (!isset($query->getQuery()->columns))
+        if (!isset($query->getQuery()->columns)) {
             $query = $query->addSelect($this->usefulScopeColumns);
+        }
 
         $query = $query
-            ->leftJoin('geonames_country_infos as country_info', $table . '.country_code', '=',
+            ->leftJoin(
+                'geonames_country_infos as country_info',
+                $table . '.country_code',
+                '=',
                 'country_info.iso'
             )
             ->addSelect(
@@ -229,7 +237,7 @@ class GeonamesGeoname extends Model
      */
     public function scopeCity($query, $name = null, $featureCodes = ['PPLC', 'PPLA', 'PPLA2', 'PPLA3'])
     {
-        return $this->scopeSearchByFeature($query,$name,'P',$featureCodes);
+        return $this->scopeSearchByFeature($query, $name, 'P', $featureCodes);
     }
 
     /**
@@ -247,7 +255,7 @@ class GeonamesGeoname extends Model
      */
     public function scopeCountry($query, $name = null, $featureCodes = ['PCLI'])
     {
-        return $this->scopeSearchByFeature($query,$name,'A',$featureCodes);
+        return $this->scopeSearchByFeature($query, $name, 'A', $featureCodes);
     }
 
 
@@ -264,11 +272,13 @@ class GeonamesGeoname extends Model
     {
         $table = 'geonames_geonames';
 
-        if (!isset($query->getQuery()->columns))
+        if (!isset($query->getQuery()->columns)) {
             $query = $query->addSelect($this->usefulScopeColumns);
+        }
 
-        if ($name !== null)
+        if ($name !== null) {
             $query = $query->where($table . '.name', 'LIKE', $name);
+        }
 
         $query = $query
             ->where($table . '.feature_class', $feature_class)
@@ -276,6 +286,4 @@ class GeonamesGeoname extends Model
 
         return $query;
     }
-
-
 }

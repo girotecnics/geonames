@@ -33,9 +33,9 @@ class CreateGeonamesFeatureCodesTable extends Migration
     public function up()
     {
         Schema::create('geonames_feature_codes', function (Blueprint $table) {
-            $table->string('code',11)->primary();
-            $table->string('name',100);
-            $table->string('description',500);
+            $table->string('code', 11)->primary();
+            $table->string('name', 100);
+            $table->string('description', 500);
         });
     }
 

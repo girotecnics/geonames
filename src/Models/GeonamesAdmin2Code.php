@@ -97,5 +97,4 @@ class GeonamesAdmin2Code extends Model
     {
         return $this->hasMany(GeonamesHierarchy::class, 'parent_id', 'geoname_id');
     }
-
 }

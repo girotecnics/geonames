@@ -73,6 +73,4 @@ class GeonamesFeatureCode extends Model
      * @var bool
      */
     public $timestamps = false;
-    
-
 }

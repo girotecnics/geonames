@@ -37,7 +37,7 @@ class CreateGeonamesHierarchiesTable extends Migration
             $table->foreign('parent_id')->references('geoname_id')->on('geonames_geonames')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('child_id')->index()->unsigned();
             $table->foreign('child_id')->references('geoname_id')->on('geonames_geonames')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('type',40)->index();
+            $table->string('type', 40)->index();
             $table->unique(['parent_id','child_id']);
         });
     }

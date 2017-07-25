@@ -23,7 +23,6 @@
 
 namespace Girotecnics\Geonames\Console;
 
-
 use Closure;
 use DB;
 use Illuminate\Console\OutputStyle;
@@ -181,7 +180,9 @@ trait CommandTrait
             },
             'timeZones' => function ($row) {
                 // Skip unusual comment line in this file
-                if ($row[0] === 'CountryCode') return null;
+                if ($row[0] === 'CountryCode') {
+                    return null;
+                }
                 return array(
                     'country_code' => $row[0],
                     'timezone_id' => $row[1],
@@ -245,11 +246,11 @@ trait CommandTrait
         /*
          * retrieve database prefix to composite $tablename
          */
-        $tableName = Config::get('database.connections.mysql.prefix') 
+        $tableName = Config::get('database.connections.mysql.prefix')
                 . $this->files[$name]['table'];
 
         // If table is empty or we are refreshing, truncate it unless it was recently truncated!
-        if (!in_array($tableName,$this->truncatedTables) &&
+        if (!in_array($tableName, $this->truncatedTables) &&
             (DB::table($tableName)->count() === 0 || $refresh)
         ) {
             $this->truncatedTables[] = $tableName;
@@ -259,10 +260,11 @@ trait CommandTrait
 
         $buffer = array();
         // If it is a custom country code, use allCountries
-        if (in_array($name, config('geonames.countries')))
+        if (in_array($name, config('geonames.countries'))) {
             $fields = $fieldsArray['allCountries'];
-        else
+        } else {
             $fields = $fieldsArray[$name];
+        }
         $this->parseFile($name, function ($row) use (&$buffer, $fields, $tableName) {
             $insert = $fields($row);
             if (isset($insert) && is_array($insert)) {
@@ -275,8 +277,9 @@ trait CommandTrait
         });
 
         // Insert leftovers in buffer
-        if (count($buffer) > 0)
+        if (count($buffer) > 0) {
             $this->updateOrInsertMultiple($tableName, $buffer);
+        }
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
@@ -321,14 +324,17 @@ trait CommandTrait
         while (!feof($fh)) {
             $line = fgets($fh);
             // ignore empty lines and comments
-            if (!$line or $line === '' or strpos($line, '#') === 0) continue;
+            if (!$line or $line === '' or strpos($line, '#') === 0) {
+                continue;
+            }
             // Geonames format is tab seperated
             $line = explode("\t", $line);
             // Insert using closure
             $callback($line);
             $steps++;
-            if (isset($bar) && $steps % ($this->bufferSize * 10) === 0)
+            if (isset($bar) && $steps % ($this->bufferSize * 10) === 0) {
                 $bar->advance($this->bufferSize * 10);
+            }
         }
         fclose($fh);
         if (isset($bar)) {
@@ -368,7 +374,9 @@ trait CommandTrait
             $line = fgets($fh);
             $currentSize += strlen($line);
             // ignore empty lines and comments
-            if (!$line or $line === '' or strpos($line, '#') === 0) continue;
+            if (!$line or $line === '' or strpos($line, '#') === 0) {
+                continue;
+            }
             $steps++;
             // Reading is so much faster, must slow down advances
             if (isset($bar) && $steps % ($this->bufferSize * 100) === 0) {
@@ -469,7 +477,7 @@ trait CommandTrait
             if ($fileSize === $urlSize) {
                 $this->line('<info>File Exists:</info> ' . $urlFileName . ' with same size as remote geonames file exists.');
                 return true;
-            } else if ($fileSize !== $urlSize && !$update) {
+            } elseif ($fileSize !== $urlSize && !$update) {
                 $this->line('<info>File Exists:</info> ' . $urlFileName . ' with different size as remote geonames file exists. You should consider downloading newest files.');
                 return true;
             } else {
@@ -490,7 +498,7 @@ trait CommandTrait
         // Create .gitignore if it does not exist in $storagePath
         if (!file_exists($storagePath.'/.gitignore')) {
             $gitignore = "*\n!.gitignore\n";
-            file_put_contents($storagePath.'/.gitignore',$gitignore);
+            file_put_contents($storagePath.'/.gitignore', $gitignore);
         }
 
         // Open file and truncate it for writing (requires fopen_wrappers)
@@ -533,8 +541,9 @@ trait CommandTrait
     protected function unZip($name)
     {
         $zipFileName = basename($this->files[$name]['url']);
-        if (!substr($zipFileName, -4) === '.zip')
+        if (!substr($zipFileName, -4) === '.zip') {
             throw new RuntimeException($zipFileName . ' does not have .zip extension');
+        }
 
         // Final file path
         $storagePath = config('geonames.storagePath');
@@ -573,8 +582,9 @@ trait CommandTrait
     protected function getUrlSize($url)
     {
         $data = get_headers($url, true);
-        if (isset($data['Content-Length']))
+        if (isset($data['Content-Length'])) {
             return (int)$data['Content-Length'];
+        }
         return false;
     }
 
@@ -607,7 +617,6 @@ trait CommandTrait
         // Get ISO codes for countries to import if there are any
         $countries = config('geonames.countries');
         if (!empty($countries)) {
-
             unset($this->files['allCountries']);
             foreach ($countries as $country) {
                 $this->files[$country] = [

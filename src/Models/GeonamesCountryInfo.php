@@ -127,8 +127,6 @@ class GeonamesCountryInfo extends Model
      */
     public function continent()
     {
-        return $this->hasOne(GeonamesGeoname::class,'geoname_id','continent_id');
+        return $this->hasOne(GeonamesGeoname::class, 'geoname_id', 'continent_id');
     }
-
-
 }

@@ -37,7 +37,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesIsoLanguageCode whereLanguageName($value)
  * @mixin \Eloquent
  */
-class GeonamesIsoLanguageCode extends Model {
+class GeonamesIsoLanguageCode extends Model
+{
     /**
      * The attributes that are mass assignable.
      *
@@ -74,5 +75,4 @@ class GeonamesIsoLanguageCode extends Model {
      * @var bool
      */
     public $timestamps = false;
-
 }

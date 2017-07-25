@@ -46,7 +46,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesAlternateName whereIsHistoric($value)
  * @mixin \Eloquent
  */
-class GeonamesAlternateName extends Model {
+class GeonamesAlternateName extends Model
+{
     /**
      * The attributes that are mass assignable.
      *
@@ -89,8 +90,8 @@ class GeonamesAlternateName extends Model {
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function geoname() {
-        return $this->belongsTo(GeonamesGeoname::class,'geoname_id','geoname_id');
+    public function geoname()
+    {
+        return $this->belongsTo(GeonamesGeoname::class, 'geoname_id', 'geoname_id');
     }
-
 }

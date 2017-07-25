@@ -51,7 +51,6 @@ class GeonamesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         $this->publishes([
             __DIR__ . '/database/migrations' => base_path('database/migrations')
         ], 'migrations');
@@ -83,5 +82,4 @@ class GeonamesServiceProvider extends ServiceProvider
     {
         return $this->serviceCommands;
     }
-
 }

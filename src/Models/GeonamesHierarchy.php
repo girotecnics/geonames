@@ -73,6 +73,4 @@ class GeonamesHierarchy extends Model
      * @var bool
      */
     public $timestamps = false;
-    
-
 }
