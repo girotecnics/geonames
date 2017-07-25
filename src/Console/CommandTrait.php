@@ -390,6 +390,7 @@ trait CommandTrait
      */
     protected function updateOrInsertMultiple($tableName, $data)
     {
+        $tableName = Config::get('database.connections.mysql.prefix').$tableName;
         $fields = '`' . implode('`,`', array_keys($data[0])) . '`';
         // Create strings for variables
         $questionMarks = '';
