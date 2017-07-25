@@ -17,21 +17,21 @@ Please include the following require in your composer.json :
 
 	{
 	    "require": {
-	        "yurtesen/geonames": "dev-master"
+	        "girotecnics/geonames": "dev-master"
 	    }
 	}
 
 or install using command line :
 
-	composer require yurtesen/geonames:dev-master
+	composer require girotecnics/geonames:dev-master
 
 after installation, you will need to add the service provider in your config\app.php to 'providers' array
 
-	Yurtesen\Geonames\GeonamesServiceProvider::class,
+	Girotecnics\Geonames\GeonamesServiceProvider::class,
 	
 or for Lumen add service provider in bootstrap\app.php Remember that [irazasyed/larasupport](https://github.com/irazasyed/larasupport) must be registered before.
     
-	$app->register(Yurtesen\Geonames\GeonamesServiceProvider::class);
+	$app->register(Girotecnics\Geonames\GeonamesServiceProvider::class);
 	
 ## Usage and Configuration
 
