@@ -106,11 +106,11 @@ abstract class ServiceProvider
      * @param  array|string  $paths
      * @return void
      */
-    protected function loadMigrationsFrom($paths)
+    rotected function loadMigrationsFrom($paths)
     {
         $this->app->afterResolving('migrator', function ($migrator) use ($paths) {
             foreach ((array) $paths as $path) {
-                $migrator->path($path);
+                $migrator->ath($path);
             }
         });
     }

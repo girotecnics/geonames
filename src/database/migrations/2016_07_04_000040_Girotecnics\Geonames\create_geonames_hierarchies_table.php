@@ -13,6 +13,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this.  If not, see <http://www.gnu.org/licenses/>.
  */
+namespace Girotecnics\Geonames;
 
 /**
  * User: Evren Yurtesen
@@ -28,7 +29,7 @@ use Illuminate\Database\Migrations\Migration;
  *
  * @package Geonames
  */
-class CreateGeonamesAdmin1CodesTable extends Migration
+class CreateGeonamesHierarchiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -37,17 +38,23 @@ class CreateGeonamesAdmin1CodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('geonames_admin1_codes', function (Blueprint $table) {
-            $table->string('code', 20)->unique();
-            $table->string('name', 100)->unique();
-            $table->string('name_ascii', 100)->unique();
-            $table->integer('geoname_id')->primary()->unsigned();
+        \Schema::create('geonames_hierarchies', function (Blueprint $table) {
+            $table->integer('parent_id')->index()->unsigned();
             $table
-                ->foreign('geoname_id')
+                ->foreign('parent_id')
                 ->references('geoname_id')
                 ->on('geonames_geonames')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->integer('child_id')->index()->unsigned();
+            $table
+                ->foreign('child_id')
+                ->references('geoname_id')
+                ->on('geonames_geonames')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('type', 40)->index();
+            $table->unique(['parent_id','child_id']);
         });
     }
 
@@ -58,6 +65,6 @@ class CreateGeonamesAdmin1CodesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('geonames_admin1_codes');
+        \Schema::drop('geonames_hierarchies');
     }
 }
