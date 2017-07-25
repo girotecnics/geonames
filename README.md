@@ -24,13 +24,17 @@ or install using command line :
 after installation, you will need to add the service provider in your config\app.php to 'providers' array
 
 	Girotecnics\Geonames\GeonamesServiceProvider::class,
-	
-or for Lumen add service provider in bootstrap\app.php Remember that [irazasyed/larasupport](https://github.com/irazasyed/larasupport) must be registered before.
-    
-	$app->register(Girotecnics\Geonames\GeonamesServiceProvider::class);
+
+and execute installation, download and seed
+
+    php artisan geonames:install
+	php artisan migrate
+	php artisan geonames:download
+	php artisan geonames:seed
+
 
 *Note:* If you are using Lumen. You have to first install [irazasyed/larasupport](https://github.com/irazasyed/larasupport) !
-	
+
 ## Usage and Configuration
 
 Please see the [wiki](https://github.com/yurtesen/geonames/wiki) for further information
