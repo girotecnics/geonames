@@ -252,8 +252,7 @@ trait CommandTrait
         /*
          * retrieve database prefix to composite $tablename
          */
-        $tableName = config('database.connections.mysql.prefix')
-                . $this->files[$name]['table'];
+        $tableName = $this->files[$name]['table'];
 
         /*
          * If table is empty or we are refreshing, 
@@ -266,6 +265,11 @@ trait CommandTrait
             $this->line('<info>Database:</info> Truncating table ' . $tableName);
             DB::table($tableName)->truncate();
         }
+
+        /*
+         * retrieve database prefix to composite $tablename
+         */
+        $tableName = \DB::getTablePrefix() . $tableName;
 
         $buffer = array();
         // If it is a custom country code, use allCountries
