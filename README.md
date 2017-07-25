@@ -1,11 +1,5 @@
 # Laravel / Lumen / Eloquent Geonames
 
-[![Latest Stable Version](https://poser.pugx.org/yurtesen/geonames/v/stable)](https://packagist.org/packages/yurtesen/geonames)
-[![Latest Unstable Version](https://poser.pugx.org/yurtesen/geonames/v/unstable)](https://packagist.org/packages/yurtesen/geonames)
-[![Monthly Downloads](https://poser.pugx.org/yurtesen/geonames/d/monthly)](https://packagist.org/packages/yurtesen/geonames)
-[![Total Downloads](https://poser.pugx.org/yurtesen/geonames/d/total.svg)](https://packagist.org/packages/yurtesen/geonames)
-[![Package for Laravel](https://img.shields.io/badge/Package%20for-Laravel/Lumen-blue.svg)](https://packagist.org/packages/yurtesen/geonames)
-[![License](https://poser.pugx.org/yurtesen/geonames/license.svg)](https://packagist.org/packages/yurtesen/geonames)
 
 This package provides probably the best Eloquent models, most complete SQL schemas and fastest Artisan commands to import/update a local copy of [GeoNames](http://www.geonames.org/) databases.
 
@@ -17,13 +11,13 @@ Please include the following require in your composer.json :
 
 	{
 	    "require": {
-	        "girotecnics/geonames": "dev-master"
+	        "girotecnics/geonames": "~1.0"
 	    }
 	}
 
 or install using command line :
 
-	composer require girotecnics/geonames:dev-master
+	composer require "girotecnics/geonames" "~1.0"
 
 after installation, you will need to add the service provider in your config\app.php to 'providers' array
 

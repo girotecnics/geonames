@@ -20,19 +20,19 @@
  * Time: 11:30 AM
  */
 
-namespace Yurtesen\Geonames\Models;
+namespace Girotecnics\Geonames\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Yurtesen\Geonames\Models\GeonamesFeatureCode
+ * Girotecnics\Geonames\Models\GeonamesFeatureCode
  *
  * @property string $code
  * @property string $name
  * @property string $description
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesFeatureCode whereCode($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesFeatureCode whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesFeatureCode whereDescription($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesFeatureCode whereCode($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesFeatureCode whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesFeatureCode whereDescription($value)
  * @mixin \Eloquent
  */
 class GeonamesFeatureCode extends Model

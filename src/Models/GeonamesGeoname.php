@@ -20,13 +20,13 @@
  * Time: 11:30 AM
  */
 
-namespace Yurtesen\Geonames\Models;
+namespace Girotecnics\Geonames\Models;
 
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Yurtesen\Geonames\Models\GeonamesGeoname
+ * Girotecnics\Geonames\Models\GeonamesGeoname
  *
  * @property integer $geoname_id
  * @property string $name
@@ -47,33 +47,33 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $dem
  * @property string $timezone_id
  * @property string $modified_at
- * @property-read \Yurtesen\Geonames\Models\GeonamesAlternateName $alternateName
- * @property-read \Yurtesen\Geonames\Models\GeonamesTimezone $timeZone
- * @property-read \Yurtesen\Geonames\Models\GeonamesCountryInfo $countryInfo
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereGeonameId($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereAsciiName($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereAlternateNames($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereLatitude($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereLongitude($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereFeatureClass($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereFeatureCode($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereCountryCode($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereCc2($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereAdmin1Code($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereAdmin2Code($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereAdmin3Code($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereAdmin4Code($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname wherePopulation($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereElevation($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereDem($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereTimezoneId($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname whereModifiedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname admin1()
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname addCountryInfo()
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname city($name = null, $featureCodes = array())
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname country($name = null, $featureCodes = array())
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesGeoname searchByFeature($name = null, $feature_class = null, $featureCodes = null)
+ * @property-read \Girotecnics\Geonames\Models\GeonamesAlternateName $alternateName
+ * @property-read \Girotecnics\Geonames\Models\GeonamesTimezone $timeZone
+ * @property-read \Girotecnics\Geonames\Models\GeonamesCountryInfo $countryInfo
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereGeonameId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereAsciiName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereAlternateNames($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereLatitude($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereLongitude($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereFeatureClass($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereFeatureCode($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereCountryCode($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereCc2($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereAdmin1Code($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereAdmin2Code($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereAdmin3Code($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereAdmin4Code($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname wherePopulation($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereElevation($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereDem($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereTimezoneId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname whereModifiedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname admin1()
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname addCountryInfo()
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname city($name = null, $featureCodes = array())
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname country($name = null, $featureCodes = array())
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesGeoname searchByFeature($name = null, $feature_class = null, $featureCodes = null)
  * @mixin \Eloquent
  */
 class GeonamesGeoname extends Model

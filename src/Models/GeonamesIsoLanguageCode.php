@@ -20,21 +20,21 @@
  * Time: 11:30 AM
  */
 
-namespace Yurtesen\Geonames\Models;
+namespace Girotecnics\Geonames\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Yurtesen\Geonames\Models\GeonamesIsoLanguageCode
+ * Girotecnics\Geonames\Models\GeonamesIsoLanguageCode
  *
  * @property string $iso_639_3
  * @property string $iso_639_2
  * @property string $iso_639_1
  * @property string $language_name
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesIsoLanguageCode whereIso6393($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesIsoLanguageCode whereIso6392($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesIsoLanguageCode whereIso6391($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesIsoLanguageCode whereLanguageName($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesIsoLanguageCode whereIso6393($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesIsoLanguageCode whereIso6392($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesIsoLanguageCode whereIso6391($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesIsoLanguageCode whereLanguageName($value)
  * @mixin \Eloquent
  */
 class GeonamesIsoLanguageCode extends Model {

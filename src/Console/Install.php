@@ -20,7 +20,7 @@
  * Time: 3:26 PM
  */
 
-namespace Yurtesen\Geonames\Console;
+namespace Girotecnics\Geonames\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
@@ -68,7 +68,7 @@ class Install extends Command
     public function handle()
     {
         $paths = ServiceProvider::pathsToPublish(
-            'Yurtesen\Geonames\GeonamesServiceProvider'
+            'Girotecnics\Geonames\GeonamesServiceProvider'
         );
 
         foreach ($paths as $from => $to) {

@@ -31,7 +31,7 @@
       "src/Models"
     ],
     "psr-4": {
-      "Yurtesen\\Geonames\\": "src/"
+      "Girotecnics\\Geonames\\": "src/"
     }
   }
 }

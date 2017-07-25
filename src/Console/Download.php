@@ -20,7 +20,7 @@
  * Time: 3:26 PM
  */
 
-namespace Yurtesen\Geonames\Console;
+namespace Girotecnics\Geonames\Console;
 
 use Illuminate\Console\Command;
 

@@ -20,19 +20,19 @@
  * Time: 11:30 AM
  */
 
-namespace Yurtesen\Geonames\Models;
+namespace Girotecnics\Geonames\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Yurtesen\Geonames\Models\GeonamesHierarchy
+ * Girotecnics\Geonames\Models\GeonamesHierarchy
  *
  * @property integer $parent_id
  * @property integer $child_id
  * @property string $type
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesHierarchy whereParentId($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesHierarchy whereChildId($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesHierarchy whereType($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesHierarchy whereParentId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesHierarchy whereChildId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesHierarchy whereType($value)
  * @mixin \Eloquent
  */
 class GeonamesHierarchy extends Model

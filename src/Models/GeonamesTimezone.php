@@ -20,23 +20,23 @@
  * Time: 11:30 AM
  */
 
-namespace Yurtesen\Geonames\Models;
+namespace Girotecnics\Geonames\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Yurtesen\Geonames\Models\GeonamesTimezone
+ * Girotecnics\Geonames\Models\GeonamesTimezone
  *
  * @property string $timezone_id
  * @property string $country_code
  * @property float $gmt_offset
  * @property float $dst_offset
  * @property float $raw_offset
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesTimezone whereTimezoneId($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesTimezone whereCountryCode($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesTimezone whereGmtOffset($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesTimezone whereDstOffset($value)
- * @method static \Illuminate\Database\Query\Builder|\Yurtesen\Geonames\Models\GeonamesTimezone whereRawOffset($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesTimezone whereTimezoneId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesTimezone whereCountryCode($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesTimezone whereGmtOffset($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesTimezone whereDstOffset($value)
+ * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesTimezone whereRawOffset($value)
  * @mixin \Eloquent
  */
 class GeonamesTimezone extends Model

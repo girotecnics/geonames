@@ -20,7 +20,7 @@
  * Time: 2:16 PM
  */
 
-namespace Yurtesen\Geonames;
+namespace Girotecnics\Geonames;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -32,9 +32,9 @@ class GeonamesServiceProvider extends ServiceProvider
      * @var array
      */
     protected $serviceCommands = [
-        'Yurtesen\Geonames\Console\Download',
-        'Yurtesen\Geonames\Console\Install',
-        'Yurtesen\Geonames\Console\Seed',
+        'Girotecnics\Geonames\Console\Download',
+        'Girotecnics\Geonames\Console\Install',
+        'Girotecnics\Geonames\Console\Seed',
     ];
 
     /**

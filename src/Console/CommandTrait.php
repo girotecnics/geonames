@@ -21,7 +21,7 @@
  * Time: 1:16 AM
  */
 
-namespace Yurtesen\Geonames\Console;
+namespace Girotecnics\Geonames\Console;
 
 
 use Closure;
@@ -241,7 +241,13 @@ trait CommandTrait
 
         // This will greatly improve the performance of inserts
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        $tableName = $this->files[$name]['table'];
+
+        /*
+         * retrieve database prefix to composite $tablename
+         */
+        $tableName = Config::get('database.connections.mysql.prefix') 
+                . $this->files[$name]['table'];
+
         // If table is empty or we are refreshing, truncate it unless it was recently truncated!
         if (!in_array($tableName,$this->truncatedTables) &&
             (DB::table($tableName)->count() === 0 || $refresh)
@@ -250,6 +256,7 @@ trait CommandTrait
             $this->line('<info>Database:</info> Truncating table ' . $tableName);
             DB::table($tableName)->truncate();
         }
+
         $buffer = array();
         // If it is a custom country code, use allCountries
         if (in_array($name, config('geonames.countries')))
@@ -390,7 +397,6 @@ trait CommandTrait
      */
     protected function updateOrInsertMultiple($tableName, $data)
     {
-        $tableName = Config::get('database.connections.mysql.prefix').$tableName;
         $fields = '`' . implode('`,`', array_keys($data[0])) . '`';
         // Create strings for variables
         $questionMarks = '';
