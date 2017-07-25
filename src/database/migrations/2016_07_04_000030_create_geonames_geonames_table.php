@@ -13,6 +13,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this.  If not, see <http://www.gnu.org/licenses/>.
  */
+namespace Geonames\Database\Migrations;
 
 /**
  * User: Evren Yurtesen
@@ -23,6 +24,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Create Geonames Tables
+ *
+ * @package Geonames
+ */
 class CreateGeonamesGeonamesTable extends Migration
 {
     /**
@@ -51,7 +57,12 @@ class CreateGeonamesGeonamesTable extends Migration
             $table->integer('elevation')->nullable();
             $table->integer('dem')->nullable();
             $table->string('timezone_id', 40)->index()->nullable();
-            $table->foreign('timezone_id')->references('timezone_id')->on('geonames_timezones')->onUpdate('cascade')->onDelete('cascade');
+            $table
+                ->foreign('timezone_id')
+                ->references('timezone_id')
+                ->on('geonames_timezones')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->date('modified_at');
         });
     }

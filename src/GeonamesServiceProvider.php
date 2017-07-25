@@ -24,6 +24,11 @@ namespace Girotecnics\Geonames;
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Service Provider for Geonames package
+ *
+ * @package Geonames
+ */
 class GeonamesServiceProvider extends ServiceProvider
 {
     /**

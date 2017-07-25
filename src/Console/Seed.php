@@ -26,6 +26,11 @@ use RuntimeException;
 use Schema;
 use Illuminate\Console\Command;
 
+/**
+ * Seed the data
+ *
+ * @package Geonames
+ */
 class Seed extends Command
 {
     /**
@@ -39,10 +44,10 @@ class Seed extends Command
      * @var string
      */
     protected $signature = 'geonames:seed 
-                            {--refresh : Truncate tables and re-insert data from scratch} 
-                            {--update-files : Update geonames files before inserting data to database}
-                            {--table= : Only import the given database table}
-                           ';
+        {--refresh : Truncate tables and re-insert data from scratch} 
+        {--update-files : Update geonames files before inserting data to database}
+        {--table= : Only import the given database table}
+        ';
 
     /**
      * The console command description.
@@ -71,7 +76,10 @@ class Seed extends Command
                     return;
                 }
             }
-            $this->line('<error>Table Not Found: </error> Table '.$table.'not found in configuration');
+            $this->line(
+                '<error>Table Not Found: </error> Table '
+                .$table.'not found in configuration'
+            );
             return;
         } else {
             $this->downloadAllFiles($updateFiles);
@@ -80,7 +88,11 @@ class Seed extends Command
                 if (Schema::hasTable($file['table'])) {
                     $this->parseGeonamesText($name, $refresh);
                 } else {
-                    throw new RuntimeException($file['table'] . ' table not found. Did you run geoname:install then run migrate ?');
+                    throw new RuntimeException(
+                        $file['table']
+                        . ' table not found. Did you run '
+                        . 'geoname:install then run migrate ?'
+                    );
                 }
             }
         }

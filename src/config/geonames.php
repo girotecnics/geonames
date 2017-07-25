@@ -56,10 +56,11 @@ return array(
     |
     | Notices:
     | * The database tables will still be created, but will stay empty.
-    | * You can still import tables using the --table=TABLENAME option in geonames:seed command
+    | * You can still import tables using the
+    | *   --table=TABLENAME option in geonames:seed command
     | * This wont remove already downloaded files (but will ignore the related ones)
-    | * If you ignore geonames_geonames, you also have to ignore tables which has foreign key
-    |   relationships. Please check the migration files.
+    | * If you ignore geonames_geonames, you also have to ignore tables which has
+    | *  foreign key relationships. Please check the migration files.
     |
     */
     'ignoreTables' => array(

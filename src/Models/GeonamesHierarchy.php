@@ -30,10 +30,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $parent_id
  * @property integer $child_id
  * @property string $type
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesHierarchy whereParentId($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesHierarchy whereChildId($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesHierarchy whereType($value)
  * @mixin \Eloquent
+ * @package Geonames
  */
 class GeonamesHierarchy extends Model
 {

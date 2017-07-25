@@ -32,12 +32,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name_ascii
  * @property integer $geoname_id
  * @property-read \Girotecnics\Geonames\Models\GeonamesGeoname $geoname
- * @property-read \Illuminate\Database\Eloquent\Collection|\Girotecnics\Geonames\Models\GeonamesHierarchy[] $hierarchies
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesAdmin1Code whereCode($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesAdmin1Code whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesAdmin1Code whereNameAscii($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesAdmin1Code whereGeonameId($value)
+ * @property-read \Girotecnics\Geonames\Models\GeonamesHierarchy[] $hierarchies
+ * @method static \Girotecnics\Geonames\Models\GeonamesAdmin1Code whereCode($value)
+ * @method static \Girotecnics\Geonames\Models\GeonamesAdmin1Code whereName($value)
+ * @method static \Girotecnics\Geonames\Models\GeonamesAdmin1Code whereNameAscii($value)
+ * @method static \Girotecnics\Geonames\Models\GeonamesAdmin1Code whereGeonameId($value)
  * @mixin \Eloquent
+ * @package Geotecnics
  */
 class GeonamesAdmin1Code extends Model
 {

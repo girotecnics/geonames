@@ -30,10 +30,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $code
  * @property string $name
  * @property string $description
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesFeatureCode whereCode($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesFeatureCode whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesFeatureCode whereDescription($value)
+ * @method static whereCode($value)
+ * @method static whereName($value)
+ * @method static whereDescription($value)
  * @mixin \Eloquent
+ * @package Geonames
  */
 class GeonamesFeatureCode extends Model
 {

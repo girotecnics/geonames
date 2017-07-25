@@ -31,11 +31,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $iso_639_2
  * @property string $iso_639_1
  * @property string $language_name
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesIsoLanguageCode whereIso6393($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesIsoLanguageCode whereIso6392($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesIsoLanguageCode whereIso6391($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesIsoLanguageCode whereLanguageName($value)
  * @mixin \Eloquent
+ * @package Geonames
  */
 class GeonamesIsoLanguageCode extends Model
 {

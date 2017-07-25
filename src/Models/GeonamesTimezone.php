@@ -32,12 +32,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $gmt_offset
  * @property float $dst_offset
  * @property float $raw_offset
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesTimezone whereTimezoneId($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesTimezone whereCountryCode($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesTimezone whereGmtOffset($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesTimezone whereDstOffset($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesTimezone whereRawOffset($value)
  * @mixin \Eloquent
+ * @package Geonames
  */
 class GeonamesTimezone extends Model
 {

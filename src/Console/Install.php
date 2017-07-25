@@ -26,6 +26,11 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Install Geonames
+ *
+ * @package Geonames
+ */
 class Install extends Command
 {
     /**
@@ -52,7 +57,9 @@ class Install extends Command
     /**
      * Create a new Constructor instance.
      *
-     * @param Filesystem $files
+     * @param Filesystem $files Filesystem
+     *
+     * @return void
      */
     public function __construct(Filesystem $files)
     {
@@ -85,8 +92,9 @@ class Install extends Command
     /**
      * Publish the file to the given path.
      *
-     * @param  string $from
-     * @param  string $to
+     * @param  string $from From
+     * @param  string $to   To
+     *
      * @return void
      */
     protected function publishFile($from, $to)
@@ -103,8 +111,9 @@ class Install extends Command
     /**
      * Publish the directory to the given directory.
      *
-     * @param  string $from
-     * @param  string $to
+     * @param  string $from From
+     * @param  string $to   To
+     *
      * @return void
      */
     protected function publishDirectory($from, $to)
@@ -113,8 +122,13 @@ class Install extends Command
         $fromContents = $this->files->files($from);
 
         foreach ($fromContents as $file) {
-            $newFile = $to . DIRECTORY_SEPARATOR . $this->files->name($file) . '.' . $this->files->extension($file);
-            if ($this->files->isFile($file) && (!in_array($newFile, $toContents) || $this->option('force'))) {
+            $newFile = $to . DIRECTORY_SEPARATOR
+                . $this->files->name($file)
+                . '.' . $this->files->extension($file);
+
+            if ($this->files->isFile($file)
+                && (!in_array($newFile, $toContents)
+                || $this->option('force'))) {
                 $this->files->copy($file, $newFile);
             }
         }
@@ -125,7 +139,8 @@ class Install extends Command
     /**
      * Create the directory to house the published files if needed.
      *
-     * @param  string $directory
+     * @param  string $directory Directory
+     *
      * @return void
      */
     protected function createParentDirectory($directory)
@@ -138,9 +153,10 @@ class Install extends Command
     /**
      * Write a status message to the console.
      *
-     * @param  string $from
-     * @param  string $to
-     * @param  string $type
+     * @param  string $from From
+     * @param  string $to   To
+     * @param  string $type Type
+     *
      * @return void
      */
     protected function status($from, $to, $type)
@@ -149,6 +165,11 @@ class Install extends Command
 
         $to = str_replace(base_path(), '', realpath($to));
 
-        $this->line('<info>Copied ' . $type . '</info> <comment>[' . $from . ']</comment> <info>To</info> <comment>[' . $to . ']</comment>');
+        $this->line(
+            '<info>Copied ' . $type
+            . '</info> <comment>[' . $from
+            . ']</comment> <info>To</info> <comment>['
+            . $to . ']</comment>'
+        );
     }
 }

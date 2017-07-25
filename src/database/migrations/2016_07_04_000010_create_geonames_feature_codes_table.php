@@ -13,6 +13,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this.  If not, see <http://www.gnu.org/licenses/>.
  */
+namespace Geonames\Database\Migrations;
 
 /**
  * User: Evren Yurtesen
@@ -23,6 +24,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Create Geonames Featrures Codes
+ *
+ * @package Geonames
+ */
 class CreateGeonamesFeatureCodesTable extends Migration
 {
     /**

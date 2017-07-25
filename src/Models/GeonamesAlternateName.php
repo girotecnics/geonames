@@ -36,15 +36,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean $isColloquial
  * @property boolean $isHistoric
  * @property-read \Girotecnics\Geonames\Models\GeonamesGeoname $geoname
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesAlternateName whereAlternateNameId($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesAlternateName whereGeonameId($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesAlternateName whereIsoLanguage($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesAlternateName whereAlternateName($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesAlternateName whereIsPreferredName($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesAlternateName whereIsShortName($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesAlternateName whereIsColloquial($value)
- * @method static \Illuminate\Database\Query\Builder|\Girotecnics\Geonames\Models\GeonamesAlternateName whereIsHistoric($value)
+ * @method static whereAlternateNameId($value)
+ * @method static whereGeonameId($value)
+ * @method static whereIsoLanguage($value)
+ * @method static whereAlternateName($value)
+ * @method static whereIsPreferredName($value)
+ * @method static whereIsShortName($value)
+ * @method static whereIsColloquial($value)
+ * @method static whereIsHistoric($value)
  * @mixin \Eloquent
+ * @package Geonames
  */
 class GeonamesAlternateName extends Model
 {

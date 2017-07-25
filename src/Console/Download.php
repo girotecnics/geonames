@@ -24,6 +24,11 @@ namespace Girotecnics\Geonames\Console;
 
 use Illuminate\Console\Command;
 
+/**
+ * Download Geonames files
+ *
+ * @package Geonames
+ */
 class Download extends Command
 {
     use CommandTrait;
